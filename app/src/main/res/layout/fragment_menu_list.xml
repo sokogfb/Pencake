@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.timotiusoktorio.pencake.data.model.State" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="state"
+            type="com.timotiusoktorio.pencake.data.model.State" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="4dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="4dp"
+            android:visibility="@{state == State.SUCCESS ? View.VISIBLE : View.GONE}"
+            tools:itemCount="6"
+            tools:layoutManager="android.support.v7.widget.GridLayoutManager"
+            tools:listitem="@layout/list_item_product"
+            tools:spanCount="2" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{state == State.LOADING ? View.VISIBLE : View.GONE}" />
+
+        <TextView
+            android:id="@+id/errorTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/message_no_products_found"
+            android:visibility="@{state == State.ERROR ? View.VISIBLE : View.GONE}" />
+
+    </FrameLayout>
+
+</layout>

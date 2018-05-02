@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "813462759870",
+    "firebase_url": "https://pencake-b2756.firebaseio.com",
+    "project_id": "pencake-b2756",
+    "storage_bucket": "pencake-b2756.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813462759870:android:089f69b320357c0c",
+        "android_client_info": {
+          "package_name": "com.timotiusoktorio.pencake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813462759870-ei38cjtg0r8jvqq8bcno4hkfmhkdndo6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCab6oNrrMGcNzPuUiKbXZ0eSEJxngMKiY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

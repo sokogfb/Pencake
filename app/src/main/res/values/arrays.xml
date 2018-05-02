@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="orders_tab_titles">
+        <item>@string/label_in_process</item>
+        <item>@string/label_past_orders</item>
+    </string-array>
+
+</resources>

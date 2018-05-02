@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="cartItem"
+            type="com.timotiusoktorio.pencake.data.model.CartItem" />
+
+        <variable
+            name="product"
+            type="com.timotiusoktorio.pencake.data.model.Product" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingEnd="24dp"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp">
+
+        <ImageView
+            android:id="@+id/productPhotoIv"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:contentDescription="@string/content_desc_product_photo"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/productNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{product.name}"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Tiramisu" />
+
+            <TextView
+                android:id="@+id/quantityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@{@string/string_format_quantity(cartItem.quantity)}"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/productNameTv"
+                app:layout_constraintStart_toEndOf="@id/productNameTv"
+                tools:text="(x 2)" />
+
+            <TextView
+                android:id="@+id/productSizeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{product.prices.get(cartItem.selectedSizeIndex).size}"
+                app:layout_constraintStart_toStartOf="@id/productNameTv"
+                app:layout_constraintTop_toBottomOf="@id/productNameTv"
+                tools:text="8 inch round" />
+
+            <TextView
+                android:id="@+id/specialRequestsTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@{TextUtils.isEmpty(cartItem.specialRequests) ? @string/text_no_special_requests : cartItem.specialRequests}"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="@id/productNameTv"
+                app:layout_constraintTop_toBottomOf="@id/productSizeTv"
+                tools:text="@string/text_no_special_requests" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/subtotalTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/string_format_price(cartItem.subtotal)}"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="$ 80" />
+
+    </LinearLayout>
+
+</layout>

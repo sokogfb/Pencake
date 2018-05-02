@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <plurals name="total_items_ordered">
+        <item quantity="one">%d item ordered</item>
+        <item quantity="other">%d items ordered</item>
+    </plurals>
+
+</resources>

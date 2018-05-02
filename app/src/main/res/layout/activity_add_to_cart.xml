@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.addtocart.AddToCartActivity">
+
+    <data>
+
+        <variable
+            name="quantity"
+            type="int" />
+
+        <variable
+            name="subtotal"
+            type="int" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/rootContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/SectionHeaderTextStyle"
+                    android:text="@string/text_select_size" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/sizeRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/white"
+                    tools:itemCount="2"
+                    tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_item_size" />
+
+                <TextView
+                    style="@style/SectionHeaderTextStyle"
+                    android:text="@string/text_special_requests" />
+
+                <FrameLayout
+                    android:id="@+id/specialRequestsSectionContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/white"
+                    android:paddingBottom="12dp"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="8dp">
+
+                    <EditText
+                        android:id="@+id/specialRequestsTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_special_requests"
+                        android:inputType="textMultiLine"
+                        android:paddingBottom="48dp"
+                        android:textSize="14sp" />
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginTop="32dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/minusQtyBtn"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="@string/content_desc_minus_button"
+                        android:src="@drawable/ic_minus" />
+
+                    <TextView
+                        android:id="@+id/quantityTv"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/background_circle_white"
+                        android:gravity="center"
+                        android:text="@{String.valueOf(quantity)}"
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText"
+                        tools:text="1" />
+
+                    <ImageButton
+                        android:id="@+id/plusQtyBtn"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:contentDescription="@string/content_desc_plus_button"
+                        android:src="@drawable/ic_plus" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <include
+            android:id="@+id/saveCartButton"
+            layout="@layout/layout_cart_bottom_bar_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cart_bottom_bar_button_height"
+            android:layout_gravity="bottom"
+            bind:buttonLabel="@{@string/label_save_cart}"
+            bind:cartQuantity="@{quantity}"
+            bind:cartSubtotal="@{subtotal}" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

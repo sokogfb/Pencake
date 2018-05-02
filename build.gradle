@@ -1,0 +1,25 @@
+buildscript {
+    ext.support_lib_version = '27.1.1'
+    ext.android_arch_components_version = '1.1.1'
+    ext.dagger_version = '2.14.1'
+    ext.firebase_version = '15.0.0'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.google.gms:google-services:3.2.0'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorWindow</item>
+        <item name="android:fontFamily">@font/slabo</item>
+        <item name="fontFamily">@font/slabo</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="listPreferredItemHeightSmall">60dp</item>
+        <item name="listPreferredItemPaddingLeft">28dp</item>
+    </style>
+
+    <style name="MyNavigationViewTextStyle" parent="Base.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/slabo</item>
+        <item name="android:textColor">@color/colorSidebarMenuText</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyTabLayoutTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/colorTabLayoutText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SectionHeaderTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="ProductDetailSectionHeaderTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BottomBarButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+</resources>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.timotiusoktorio.pencake.data.model.User" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/rootContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/mainContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/SectionHeaderTextStyle"
+                    android:text="@string/text_contact_info" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/white"
+                    android:paddingBottom="16dp"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="16dp">
+
+                    <ImageView
+                        android:id="@+id/nameIconIv"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:contentDescription="@string/content_desc_account_icon"
+                        android:src="@drawable/ic_account"
+                        app:layout_constraintBottom_toBottomOf="@id/nameTextField"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/nameTextField" />
+
+                    <EditText
+                        android:id="@+id/nameTextField"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:hint="@string/hint_name"
+                        android:imeOptions="actionDone"
+                        android:inputType="textNoSuggestions"
+                        android:text="@{user.displayName}"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/nameIconIv" />
+
+                    <ImageView
+                        android:id="@+id/emailIconIv"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:contentDescription="@string/content_desc_email_icon"
+                        android:src="@drawable/ic_email"
+                        app:layout_constraintBottom_toBottomOf="@id/emailTextField"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/emailTextField" />
+
+                    <EditText
+                        android:id="@+id/emailTextField"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:enabled="false"
+                        android:hint="@string/hint_email"
+                        android:imeOptions="actionDone"
+                        android:inputType="textEmailAddress"
+                        android:text="@{user.email}"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/emailIconIv"
+                        app:layout_constraintTop_toBottomOf="@id/nameTextField" />
+
+                    <ImageView
+                        android:id="@+id/phoneIconIv"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:contentDescription="@string/content_desc_phone_icon"
+                        android:src="@drawable/ic_phone"
+                        app:layout_constraintBottom_toBottomOf="@id/phoneTextField"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/phoneTextField" />
+
+                    <EditText
+                        android:id="@+id/phoneTextField"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/hint_phone"
+                        android:imeOptions="actionDone"
+                        android:inputType="phone"
+                        android:text="@{user.phone}"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/phoneIconIv"
+                        app:layout_constraintTop_toBottomOf="@id/emailTextField" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    style="@style/SectionHeaderTextStyle"
+                    android:text="@string/label_update_password" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="16dp">
+
+                    <EditText
+                        android:id="@+id/oldPasswordTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_old_password"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/newPasswordTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/hint_new_password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/updatePasswordButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/label_update_password" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/signOutButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="24dp"
+            android:text="@string/label_sign_out" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="nav_view_width">304dp</dimen>
+    <dimen name="nav_header_height">248dp</dimen>
+    <dimen name="product_detail_appbar_height">288dp</dimen>
+    <dimen name="cart_bottom_bar_button_height">56dp</dimen>
+
+    <!-- This dimen overrides the navigation drawer menu icon size -->
+    <dimen name="design_navigation_icon_size" tools:override="true">32dp</dimen>
+
+</resources>

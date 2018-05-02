@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.productdetail.ProductDetailActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="product"
+            type="com.timotiusoktorio.pencake.data.model.Product" />
+
+        <variable
+            name="cartQuantity"
+            type="int" />
+
+        <variable
+            name="cartSubtotal"
+            type="int" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/rootContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/product_detail_appbar_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:elevation="4dp">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <ImageView
+                    android:id="@+id/productPhotoIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/content_desc_product_photo"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/scrim_gradient"
+                    android:fitsSystemWindows="true" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="32dp">
+
+                <TextView
+                    android:id="@+id/productNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{product.name}"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:text="Tiramisu" />
+
+                <TextView
+                    android:id="@+id/productDescTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:text="@{product.description}"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="16sp"
+                    tools:text="Layers of savoiardi soaked with espresso, with tiramisu crème filling, topped with cocoa." />
+
+                <TextView
+                    style="@style/ProductDetailSectionHeaderTextStyle"
+                    android:text="@string/text_price_per_cake" />
+
+                <TextView
+                    android:id="@+id/productPriceTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@{product.combinedPrices}"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="$30 (6'' round)" />
+
+                <TextView
+                    style="@style/ProductDetailSectionHeaderTextStyle"
+                    android:text="@string/text_time_of_work" />
+
+                <TextView
+                    android:id="@+id/productTimeOfWorkTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{product.timeOfWorkDesc}"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="1 - 2 days" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addToCartFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_add_to_cart"
+            app:fabSize="normal"
+            app:layout_anchor="@id/appBar"
+            app:layout_anchorGravity="bottom|end" />
+
+        <include
+            android:id="@+id/viewCartButton"
+            layout="@layout/layout_cart_bottom_bar_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cart_bottom_bar_button_height"
+            android:layout_gravity="bottom"
+            android:visibility="@{cartQuantity > 0 ? View.VISIBLE : View.GONE}"
+            bind:buttonLabel="@{@string/label_view_cart}"
+            bind:cartQuantity="@{cartQuantity}"
+            bind:cartSubtotal="@{cartSubtotal}" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

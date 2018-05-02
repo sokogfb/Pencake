@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.timotiusoktorio.pencake.data.model.State" />
+
+        <variable
+            name="state"
+            type="com.timotiusoktorio.pencake.data.model.State" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ordersRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{state == State.SUCCESS ? View.VISIBLE : View.GONE}"
+            tools:itemCount="1"
+            tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:listitem="@layout/list_item_order" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{state == State.LOADING ? View.VISIBLE : View.GONE}" />
+
+        <TextView
+            android:id="@+id/errorTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/message_no_orders_found"
+            android:visibility="@{state == State.ERROR ? View.VISIBLE : View.GONE}" />
+
+    </FrameLayout>
+
+</layout>

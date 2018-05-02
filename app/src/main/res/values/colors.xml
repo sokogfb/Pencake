@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#795548</color>
+    <color name="colorPrimaryDark">#5D4037</color>
+    <color name="colorAccent">#FF9800</color>
+    <color name="colorWindow">#EFEBE9</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorSidebarMenuText">#C89F91</color>
+    <color name="colorTabLayoutText">#B3FFFFFF</color>
+    <color name="colorTabLayoutTextSelected">#FFFFFF</color>
+    <color name="colorMenuListItemTextContainer">#BF5D4037</color>
+    <color name="colorGreenCircle">#72BB53</color>
+    <color name="colorOrderSubtotal">#4C7A34</color>
+    <color name="colorSignOutButton">#D32F2F</color>
+    <color name="colorAuthTabs">#E93578</color>
+
+</resources>

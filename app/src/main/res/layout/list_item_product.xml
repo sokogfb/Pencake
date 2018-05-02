@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.timotiusoktorio.pencake.data.model.Product" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="4dp"
+        android:foreground="?attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/productPhotoIv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="@string/content_desc_product_photo"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <View
+            android:id="@+id/textContainer"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorMenuListItemTextContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/productNameTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:text="@{product.name}"
+            app:layout_constraintBottom_toBottomOf="@id/textContainer"
+            app:layout_constraintEnd_toStartOf="@id/productPriceTv"
+            app:layout_constraintStart_toStartOf="@id/textContainer"
+            app:layout_constraintTop_toTopOf="@id/textContainer"
+            tools:text="Cheesecake" />
+
+        <TextView
+            android:id="@+id/productPriceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@{@string/string_format_price(product.prices.get(0).price)}"
+            android:textColor="@android:color/white"
+            app:layout_constraintBaseline_toBaselineOf="@id/productNameTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="$ 35" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

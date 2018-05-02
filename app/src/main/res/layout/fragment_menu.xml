@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.timotiusoktorio.pencake.data.model.State" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="state"
+            type="com.timotiusoktorio.pencake.data.model.State" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/rootContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:tabContentStart="72dp"
+                app:tabGravity="center"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/colorTabLayoutTextSelected"
+                app:tabTextAppearance="@style/MyTabLayoutTextStyle" />
+
+        </android.support.v4.view.ViewPager>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{state == State.LOADING ? View.VISIBLE : View.GONE}" />
+
+        <TextView
+            android:id="@+id/errorTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/message_no_categories_found"
+            android:visibility="@{state == State.ERROR ? View.VISIBLE : View.GONE}" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/cartFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_cart"
+            app:fabSize="normal" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

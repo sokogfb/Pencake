@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Pencake</string>
+    <string name="google_maps_api_key">AIzaSyAMPgJ3kCa4ZBPpN9BI1auXLD33lFQaEVI</string>
+
+    <string name="action_favorite">Favorite</string>
+    <string name="action_share">Share</string>
+    <string name="action_remove_from_cart">Remove from cart</string>
+    <string name="action_clear_cart">Clear cart</string>
+
+    <string name="content_desc_app_logo">App logo</string>
+    <string name="content_desc_open_drawer">Open drawer</string>
+    <string name="content_desc_close_drawer">Close drawer</string>
+    <string name="content_desc_product_photo">Product photo</string>
+    <string name="content_desc_minus_button">Minus button</string>
+    <string name="content_desc_plus_button">Plus button</string>
+    <string name="content_desc_account_icon">Account icon</string>
+    <string name="content_desc_email_icon">Email icon</string>
+    <string name="content_desc_phone_icon">Phone icon</string>
+    <string name="content_desc_date_icon">Date icon</string>
+    <string name="content_desc_time_icon">Time icon</string>
+    <string name="content_desc_done_circle_icon">Done circle icon</string>
+    <string name="content_desc_favorites_empty_icon">Favorites empty icon</string>
+
+    <string name="dialog_confirmation_remove_from_cart">Remove product from cart?</string>
+    <string name="dialog_confirmation_clear_cart">Remove all items in cart?</string>
+    <string name="dialog_confirmation_sign_out">Are you sure you want to sign out?</string>
+    <string name="dialog_message_place_order_error">Please provide your contact information and choose the pickup date to proceed.</string>
+    <string name="dialog_title_place_order_error">Place Order Error</string>
+    <string name="dialog_title_update_password_error">Update Password Error</string>
+
+    <string name="hint_special_requests">Add a note (allergies, special requests, etc)</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_date">Date</string>
+    <string name="hint_time">Time</string>
+    <string name="hint_old_password">Old password</string>
+    <string name="hint_new_password">New password</string>
+
+    <string name="message_no_categories_found">No categories found</string>
+    <string name="message_no_products_found">No products found</string>
+    <string name="message_no_items_found">No items found</string>
+    <string name="message_no_orders_found">No orders found</string>
+    <string name="message_update_password_success">Update password success.</string>
+
+    <string name="label_menu">Menu</string>
+    <string name="label_orders">Orders</string>
+    <string name="label_favorites">Favorites</string>
+    <string name="label_profile">Profile</string>
+    <string name="label_about">About</string>
+    <string name="label_cart">Cart</string>
+    <string name="label_order_detail">Order Detail</string>
+    <string name="label_in_process">In Process</string>
+    <string name="label_past_orders">Past Orders</string>
+    <string name="label_save_cart">Save Cart</string>
+    <string name="label_view_cart">View Cart</string>
+    <string name="label_remove">Remove</string>
+    <string name="label_get_directions">Get Directions</string>
+    <string name="label_place_order">Place Order</string>
+    <string name="label_view_orders">View Orders</string>
+    <string name="label_back_to_menu">Back to Menu</string>
+    <string name="label_contact_us">Contact Us</string>
+    <string name="label_update_password">Update Password</string>
+    <string name="label_sign_out">Sign Out</string>
+
+    <string name="string_format_price">$ %d</string>
+    <string name="string_format_quantity">(x %d)</string>
+    <string name="string_format_order_date">Ordered on %s</string>
+
+    <string name="text_price_per_cake">Price per cake</string>
+    <string name="text_time_of_work">Time of work</string>
+    <string name="text_select_size">Select size</string>
+    <string name="text_special_requests">Special requests (optional)</string>
+    <string name="text_order_summary">Order summary</string>
+    <string name="text_no_special_requests">no special requests</string>
+    <string name="text_subtotal">Subtotal</string>
+    <string name="text_contact_info">Contact info</string>
+    <string name="text_pickup_schedule">Pickup schedule</string>
+    <string name="text_pickup_schedule_desc">Pick up schedule varies based on time of work</string>
+    <string name="text_store_address">Store address</string>
+    <string name="text_payment_options">Payment options</string>
+    <string name="text_thank_you">Thank You!</string>
+    <string name="text_order_confirmation">Your order has successfully been placed.\nWe\'ll let you know when there\'s an update</string>
+    <string name="text_cash_on_pickup">Cash on pickup</string>
+    <string name="text_order_status">Order status</string>
+    <string name="text_ready_for_pickup">Ready for pickup:</string>
+    <string name="text_order_status_colon">Order status:</string>
+    <string name="text_order_placed">Order placed</string>
+    <string name="text_preparing">Preparing</string>
+    <string name="text_pickup_ready">Pickup ready</string>
+    <string name="text_contact_us_header">Have questions about your order?</string>
+    <string name="text_no_favorites_found">No favorites found</string>
+    <string name="text_no_favorites_found_desc">Press the heart icon from product detail screen to save product as a favorite</string>
+    <string name="text_our_location">Our location</string>
+    <string name="text_search_cakes">Search cakes</string>
+
+</resources>
