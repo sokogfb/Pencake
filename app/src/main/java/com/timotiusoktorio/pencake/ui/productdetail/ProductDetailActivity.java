@@ -1,9 +1,7 @@
 package com.timotiusoktorio.pencake.ui.productdetail;
 
-import android.appwidget.AppWidgetManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -21,7 +19,6 @@ import com.timotiusoktorio.pencake.databinding.ActivityProductDetailBinding;
 import com.timotiusoktorio.pencake.ui.BaseActivity;
 import com.timotiusoktorio.pencake.ui.addtocart.AddToCartActivity;
 import com.timotiusoktorio.pencake.ui.cart.CartActivity;
-import com.timotiusoktorio.pencake.widget.MyAppWidgetProvider;
 
 import javax.inject.Inject;
 
@@ -137,17 +134,7 @@ public class ProductDetailActivity extends BaseActivity {
     private void updateFavoriteMenuItem(@Nullable Boolean favoriteFlag) {
         if (favoriteFlag != null) {
             favoriteMenuItem.setIcon(favoriteFlag ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
-            updateAppWidgetProvider();
         }
-    }
-
-    private void updateAppWidgetProvider() {
-        Intent intent = new Intent(this, MyAppWidgetProvider.class);
-        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        ComponentName componentName = new ComponentName(getApplication(), MyAppWidgetProvider.class);
-        int[] appWidgetI‌​ds = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(componentName);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetI‌​ds);
-        sendBroadcast(intent);
     }
 
     public static Intent newIntent(FragmentActivity activity, String productJson) {

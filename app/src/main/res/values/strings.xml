@@ -94,6 +94,5 @@
     <string name="text_no_favorites_found">No favorites found</string>
     <string name="text_no_favorites_found_desc">Press the heart icon from product detail screen to save product as a favorite</string>
     <string name="text_our_location">Our location</string>
-    <string name="text_search_cakes">Search cakes</string>
 
 </resources>

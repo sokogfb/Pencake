@@ -1,9 +1,7 @@
 package com.timotiusoktorio.pencake.ui;
 
 import android.app.Activity;
-import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -21,7 +19,6 @@ import android.view.MenuItem;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
-import com.timotiusoktorio.pencake.FavoritesDataService;
 import com.timotiusoktorio.pencake.R;
 import com.timotiusoktorio.pencake.data.source.DataManager;
 import com.timotiusoktorio.pencake.databinding.ActivityMainBinding;
@@ -29,7 +26,6 @@ import com.timotiusoktorio.pencake.ui.favorites.FavoritesFragment;
 import com.timotiusoktorio.pencake.ui.menu.MenuFragment;
 import com.timotiusoktorio.pencake.ui.orders.OrdersFragment;
 import com.timotiusoktorio.pencake.ui.profile.ProfileFragment;
-import com.timotiusoktorio.pencake.widget.MyAppWidgetProvider;
 
 import java.util.Collections;
 import java.util.List;
@@ -80,7 +76,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             if (resultCode == Activity.RESULT_OK) {
                 dataManager.saveUser();
                 selectNavMenuItem(0);
-                startService(new Intent(this, FavoritesDataService.class));
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 finish();
             }
@@ -160,21 +155,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .commit();
     }
 
-    private void updateAppWidgetProvider() {
-        Intent intent = new Intent(this, MyAppWidgetProvider.class);
-        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        ComponentName componentName = new ComponentName(getApplication(), MyAppWidgetProvider.class);
-        int[] appWidgetI‌​ds = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(componentName);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetI‌​ds);
-        sendBroadcast(intent);
-    }
-
     private BroadcastReceiver signOutBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action != null && action.equals(ACTION_SIGN_OUT)) {
-                updateAppWidgetProvider();
                 goToSignInScreen();
             }
         }
