@@ -17,10 +17,10 @@ public class OrderConfirmationActivity extends BaseActivity {
     }
 
     public void onViewOrdersButtonClick(View view) {
-        startActivity(MainActivity.newIntent(this, 1));
+//        startActivity(MainActivity.newIntent(this, 1));
     }
 
     public void onBackToMenuButtonClick(View view) {
-        startActivity(MainActivity.newIntent(this, 0));
+//        startActivity(MainActivity.newIntent(this, 0));
     }
 }
