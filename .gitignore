@@ -185,8 +185,5 @@ Temporary Items
 
 # End of https://www.gitignore.io/api/macos,android,androidstudio
 
-# Unused Kotlin classes
-kotlin/
-
 # Mocks
 mocks/
