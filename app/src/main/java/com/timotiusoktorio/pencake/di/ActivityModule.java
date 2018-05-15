@@ -7,7 +7,6 @@ import com.timotiusoktorio.pencake.ui.cart.CartViewModelFactory;
 import com.timotiusoktorio.pencake.ui.favorites.FavoritesViewModelFactory;
 import com.timotiusoktorio.pencake.ui.orderdetail.OrderDetailViewModelFactory;
 import com.timotiusoktorio.pencake.ui.orders.OrdersListFragmentViewModelFactory;
-import com.timotiusoktorio.pencake.ui.productdetail.ProductDetailViewModelFactory;
 import com.timotiusoktorio.pencake.ui.profile.ProfileViewModelFactory;
 
 import dagger.Module;
@@ -20,11 +19,6 @@ public class ActivityModule {
 
     public ActivityModule(BaseActivity activity) {
         this.activity = activity;
-    }
-
-    @Provides
-    public ProductDetailViewModelFactory provideProductDetailViewModelFactory(DataManager dataManager) {
-        return new ProductDetailViewModelFactory(dataManager);
     }
 
     @Provides

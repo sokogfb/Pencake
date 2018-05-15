@@ -46,7 +46,7 @@ class MenuListFragment : Fragment() {
         val categoryId = arguments?.getString(ARG_CATEGORY_ID)
                 ?: throw IllegalStateException("Category ID was not sent here as an argument")
 
-        withViewModel({ MenuListFragmentViewModel(categoryId, dataManager) }) {
+        withViewModel({ MenuListFragmentViewModel(dataManager, categoryId) }) {
             observe(productsLiveData, ::updateData)
             observe(stateLiveData, ::updateState)
         }
