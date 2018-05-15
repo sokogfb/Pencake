@@ -5,8 +5,6 @@ import com.timotiusoktorio.pencake.ui.BaseActivity;
 import com.timotiusoktorio.pencake.ui.addtocart.AddToCartViewModelFactory;
 import com.timotiusoktorio.pencake.ui.cart.CartViewModelFactory;
 import com.timotiusoktorio.pencake.ui.favorites.FavoritesViewModelFactory;
-import com.timotiusoktorio.pencake.ui.menu.MenuFragmentViewModelFactory;
-import com.timotiusoktorio.pencake.ui.menu.MenuListFragmentViewModelFactory;
 import com.timotiusoktorio.pencake.ui.orderdetail.OrderDetailViewModelFactory;
 import com.timotiusoktorio.pencake.ui.orders.OrdersListFragmentViewModelFactory;
 import com.timotiusoktorio.pencake.ui.productdetail.ProductDetailViewModelFactory;
@@ -22,16 +20,6 @@ public class ActivityModule {
 
     public ActivityModule(BaseActivity activity) {
         this.activity = activity;
-    }
-
-    @Provides
-    public MenuFragmentViewModelFactory provideMenuFragmentViewModelFactory(DataManager dataManager) {
-        return new MenuFragmentViewModelFactory(dataManager);
-    }
-
-    @Provides
-    public MenuListFragmentViewModelFactory provideMenuListFragmentViewModelFactory(DataManager dataManager) {
-        return new MenuListFragmentViewModelFactory(dataManager);
     }
 
     @Provides

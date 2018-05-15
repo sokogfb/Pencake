@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,6 @@ import com.timotiusoktorio.pencake.data.model.Product;
 import com.timotiusoktorio.pencake.data.model.State;
 import com.timotiusoktorio.pencake.databinding.FragmentFavoritesBinding;
 import com.timotiusoktorio.pencake.ui.BaseActivity;
-import com.timotiusoktorio.pencake.ui.adapters.ProductsRvAdapter;
-import com.timotiusoktorio.pencake.ui.productdetail.ProductDetailActivity;
 
 import java.util.List;
 
@@ -28,7 +25,7 @@ public class FavoritesFragment extends Fragment {
     @Inject FavoritesViewModelFactory vmFactory;
 
     private FragmentFavoritesBinding binding;
-    private ProductsRvAdapter adapter;
+//    private ProductsRvAdapter adapter;
     private FavoritesViewModel viewModel;
 
     @Nullable
@@ -41,15 +38,15 @@ public class FavoritesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter = new ProductsRvAdapter(new ProductsRvAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Product product) {
-                startActivity(ProductDetailActivity.newIntent(requireActivity(), product.toJson()));
-            }
-        });
-        binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2));
-        binding.recyclerView.setHasFixedSize(true);
+//        adapter = new ProductsRvAdapter(new ProductsRvAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(Product product) {
+//                startActivity(ProductDetailActivity.newIntent(requireActivity(), product.toJson()));
+//            }
+//        });
+//        binding.recyclerView.setAdapter(adapter);
+//        binding.recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2));
+//        binding.recyclerView.setHasFixedSize(true);
     }
 
     @Override
@@ -87,7 +84,7 @@ public class FavoritesFragment extends Fragment {
 
     private void updateData(@Nullable List<Product> data) {
         if (data != null) {
-            adapter.updateData(data);
+//            adapter.updateData(data);
         }
     }
 

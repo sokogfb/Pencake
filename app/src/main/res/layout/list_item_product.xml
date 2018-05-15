@@ -1,68 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="4dp"
+    android:foreground="?attr/selectableItemBackground">
 
-    <data>
-
-        <variable
-            name="product"
-            type="com.timotiusoktorio.pencake.data.model.Product" />
-
-    </data>
-
-    <android.support.constraint.ConstraintLayout
+    <ImageView
+        android:id="@+id/productPhotoIv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginTop="4dp"
-        android:foreground="?attr/selectableItemBackground">
+        android:layout_height="200dp"
+        android:contentDescription="@string/content_desc_product_photo"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
 
-        <ImageView
-            android:id="@+id/productPhotoIv"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:contentDescription="@string/content_desc_product_photo"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-        <View
-            android:id="@+id/textContainer"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/colorMenuListItemTextContainer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorMenuListItemTextContainer"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/productNameTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@android:color/white"
-            android:text="@{product.name}"
-            app:layout_constraintBottom_toBottomOf="@id/textContainer"
-            app:layout_constraintEnd_toStartOf="@id/productPriceTv"
-            app:layout_constraintStart_toStartOf="@id/textContainer"
-            app:layout_constraintTop_toTopOf="@id/textContainer"
             tools:text="Cheesecake" />
 
         <TextView
             android:id="@+id/productPriceTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@{@string/string_format_price(product.prices.get(0).price)}"
+            android:layout_marginEnd="12dp"
             android:textColor="@android:color/white"
-            app:layout_constraintBaseline_toBaselineOf="@id/productNameTv"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="$ 35" />
+            tools:text="$ 40" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
-</layout>
+</android.support.constraint.ConstraintLayout>
