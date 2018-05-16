@@ -2,7 +2,6 @@ package com.timotiusoktorio.pencake.di;
 
 import com.timotiusoktorio.pencake.data.source.DataManager;
 import com.timotiusoktorio.pencake.ui.BaseActivity;
-import com.timotiusoktorio.pencake.ui.addtocart.AddToCartViewModelFactory;
 import com.timotiusoktorio.pencake.ui.cart.CartViewModelFactory;
 import com.timotiusoktorio.pencake.ui.favorites.FavoritesViewModelFactory;
 import com.timotiusoktorio.pencake.ui.orderdetail.OrderDetailViewModelFactory;
@@ -19,11 +18,6 @@ public class ActivityModule {
 
     public ActivityModule(BaseActivity activity) {
         this.activity = activity;
-    }
-
-    @Provides
-    public AddToCartViewModelFactory provideAddToCartViewModelFactory(DataManager dataManager) {
-        return new AddToCartViewModelFactory(dataManager);
     }
 
     @Provides

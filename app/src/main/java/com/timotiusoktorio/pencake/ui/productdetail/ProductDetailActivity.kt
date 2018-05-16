@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.squareup.picasso.Picasso
 import com.timotiusoktorio.pencake.R
 import com.timotiusoktorio.pencake.data.model.Product
 import com.timotiusoktorio.pencake.data.source.DataManager
 import com.timotiusoktorio.pencake.extensions.consume
+import com.timotiusoktorio.pencake.extensions.loadUrl
 import com.timotiusoktorio.pencake.extensions.observe
 import com.timotiusoktorio.pencake.extensions.withViewModel
 import com.timotiusoktorio.pencake.ui.BaseActivity
 import com.timotiusoktorio.pencake.ui.addtocart.AddToCartActivity
 import com.timotiusoktorio.pencake.ui.cart.CartActivity
 import kotlinx.android.synthetic.main.activity_product_detail.*
+import org.jetbrains.anko.bundleOf
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
@@ -30,25 +31,11 @@ class ProductDetailActivity : BaseActivity() {
         setContentView(R.layout.activity_product_detail)
         component.inject(this)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowTitleEnabled(false)
-        }
+        val product = Product.fromJson(intent.getStringExtra(EXTRA_PRODUCT_JSON))
 
-        if (!intent.hasExtra(EXTRA_PRODUCT_JSON)) {
-            throw IllegalStateException("Product JSON was not sent here as an intent extra")
-        }
-
-        val productJson = intent.getStringExtra(EXTRA_PRODUCT_JSON)
-        val product = Product.fromJson(productJson)
+        initActionBar()
         initViews(product)
-
-        viewModel = withViewModel({ ProductDetailViewModel(dataManager, product) }) {
-            observe(cartQuantityLiveData, ::updateCartQuantity)
-            observe(cartSubtotalLiveData, ::updateCartSubtotal)
-            observe(favoriteFlagLiveData, ::updateFavoriteMenuItem)
-        }
+        initViewModel(product)
     }
 
     override fun onStart() {
@@ -67,18 +54,35 @@ class ProductDetailActivity : BaseActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 
+    private fun initActionBar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowTitleEnabled(false)
+        }
+    }
+
     private fun initViews(product: Product) {
         productNameTv.text = product.name
         productDescTv.text = product.description
         productPriceTv.text = product.combinedPrices
         productTimeOfWorkTv.text = product.timeOfWorkDesc
+        productPhotoIv.loadUrl(product.imageUrls[0])
 
-        Picasso.get().load(product.imageUrls[0]).fit().centerCrop()
-                .placeholder(R.drawable.placeholder_image)
-                .into(productPhotoIv)
-
-        addToCartFab.setOnClickListener { startActivity(AddToCartActivity.newIntent(this, product.toJson(), null)) }
+        addToCartFab.setOnClickListener {
+            startActivity<AddToCartActivity>(AddToCartActivity.EXTRA_BUNDLE to bundleOf(
+                    AddToCartActivity.KEY_PRODUCT_JSON to product.toJson(),
+                    AddToCartActivity.KEY_CART_ITEM_JSON to null))
+        }
         viewCartButton.setOnClickListener { startActivity<CartActivity>() }
+    }
+
+    private fun initViewModel(product: Product) {
+        viewModel = withViewModel({ ProductDetailViewModel(dataManager, product) }) {
+            observe(cartQuantityLiveData, ::updateCartQuantity)
+            observe(cartSubtotalLiveData, ::updateCartSubtotal)
+            observe(favoriteFlagLiveData, ::updateFavoriteMenuItem)
+        }
     }
 
     private fun updateCartQuantity(cartQuantity: Int?) {

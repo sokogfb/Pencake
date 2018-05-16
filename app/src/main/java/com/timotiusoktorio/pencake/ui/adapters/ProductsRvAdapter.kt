@@ -3,15 +3,14 @@ package com.timotiusoktorio.pencake.ui.adapters
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.squareup.picasso.Picasso
 import com.timotiusoktorio.pencake.R
 import com.timotiusoktorio.pencake.data.model.Product
 import com.timotiusoktorio.pencake.extensions.inflate
+import com.timotiusoktorio.pencake.extensions.loadUrl
 import kotlinx.android.synthetic.main.list_item_product.view.*
 
-class ProductsRvAdapter(val listener: (Product) -> Unit) : RecyclerView.Adapter<ProductsRvAdapter.ViewHolder>() {
-
-    private val products: MutableList<Product> = mutableListOf()
+class ProductsRvAdapter(private val products: MutableList<Product> = mutableListOf(),
+                        private val listener: (Product) -> Unit) : RecyclerView.Adapter<ProductsRvAdapter.ViewHolder>() {
 
     fun updateData(data: List<Product>) {
         products.clear()
@@ -30,11 +29,7 @@ class ProductsRvAdapter(val listener: (Product) -> Unit) : RecyclerView.Adapter<
         fun bind(product: Product) = with(itemView) {
             productNameTv.text = product.name
             productPriceTv.text = context.getString(R.string.string_format_price, product.prices[0].price)
-
-            Picasso.get().load(product.imageUrls[0]).fit().centerCrop()
-                    .placeholder(R.drawable.placeholder_image)
-                    .into(productPhotoIv)
-
+            productPhotoIv.loadUrl(product.imageUrls[0])
             setOnClickListener { listener(product) }
         }
     }

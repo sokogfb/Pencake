@@ -38,7 +38,6 @@ import com.timotiusoktorio.pencake.data.model.StoreInfo;
 import com.timotiusoktorio.pencake.databinding.ActivityCartBinding;
 import com.timotiusoktorio.pencake.ui.BaseActivity;
 import com.timotiusoktorio.pencake.ui.adapters.CartRvAdapter;
-import com.timotiusoktorio.pencake.ui.addtocart.AddToCartActivity;
 import com.timotiusoktorio.pencake.ui.dialogs.AlertDialogFragment;
 import com.timotiusoktorio.pencake.ui.dialogs.ConfirmationDialogFragment;
 import com.timotiusoktorio.pencake.ui.dialogs.DatePickerFragment;
@@ -96,7 +95,7 @@ public class CartActivity extends BaseActivity implements
         adapter.setListener(new CartRvAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(CartItem cartItem) {
-                startActivity(AddToCartActivity.newIntent(CartActivity.this, cartItem.getProductJson(), cartItem.toJson()));
+//                startActivity(AddToCartActivity.newIntent(CartActivity.this, cartItem.getProductJson(), cartItem.toJson()));
             }
         });
         binding.cartRv.setAdapter(adapter);
