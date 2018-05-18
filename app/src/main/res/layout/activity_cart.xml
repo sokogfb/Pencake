@@ -1,417 +1,408 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".ui.cart.CartActivity">
 
-    <data>
-
-        <import type="com.timotiusoktorio.pencake.data.model.State" />
-
-        <import type="com.timotiusoktorio.pencake.util.DateFormatter" />
-
-        <import type="android.view.View" />
-
-        <variable
-            name="state"
-            type="com.timotiusoktorio.pencake.data.model.State" />
-
-        <variable
-            name="cartQuantity"
-            type="int" />
-
-        <variable
-            name="cartSubtotal"
-            type="int" />
-
-        <variable
-            name="contactInfo"
-            type="com.timotiusoktorio.pencake.data.model.ContactInfo" />
-
-        <variable
-            name="pickupSchedule"
-            type="java.util.Calendar" />
-
-        <variable
-            name="storeInfo"
-            type="com.timotiusoktorio.pencake.data.model.StoreInfo" />
-
-    </data>
-
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/rootContainer"
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
+        <LinearLayout
+            android:id="@+id/mainContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{state == State.SUCCESS ? View.VISIBLE : View.GONE}">
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/mainContainer"
+            <TextView
+                style="@style/SectionHeaderTextStyle"
+                android:text="@string/text_order_summary" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cartRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:layout_marginTop="16dp"
+                tools:itemCount="1"
+                tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/list_item_cart" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="16dp">
 
                 <TextView
-                    style="@style/SectionHeaderTextStyle"
-                    android:text="@string/text_order_summary" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/cartRv"
-                    android:layout_width="match_parent"
+                    android:id="@+id/subtotalLabelTv"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    tools:itemCount="1"
-                    tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item_cart" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:orientation="horizontal"
-                    android:paddingBottom="16dp"
-                    android:paddingEnd="24dp"
-                    android:paddingStart="24dp"
-                    android:paddingTop="16dp">
-
-                    <TextView
-                        android:id="@+id/subtotalLabelTv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/text_subtotal"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/subtotalTv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="@{@string/string_format_price(cartSubtotal)}"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textSize="16sp"
-                        tools:text="$ 80" />
-
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:text="@string/text_subtotal"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="16sp" />
 
                 <TextView
-                    style="@style/SectionHeaderTextStyle"
-                    android:text="@string/text_contact_info" />
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/subtotalTv"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@android:color/white"
-                    android:paddingBottom="16dp"
-                    android:paddingEnd="20dp"
-                    android:paddingStart="20dp"
-                    android:paddingTop="16dp">
-
-                    <ImageView
-                        android:id="@+id/nameIconIv"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:contentDescription="@string/content_desc_account_icon"
-                        android:src="@drawable/ic_account"
-                        app:layout_constraintBottom_toBottomOf="@id/nameTextField"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/nameTextField" />
-
-                    <EditText
-                        android:id="@+id/nameTextField"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:hint="@string/hint_name"
-                        android:imeOptions="actionDone"
-                        android:inputType="textNoSuggestions"
-                        android:text="@{contactInfo.name}"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/nameIconIv" />
-
-                    <ImageView
-                        android:id="@+id/emailIconIv"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:contentDescription="@string/content_desc_email_icon"
-                        android:src="@drawable/ic_email"
-                        app:layout_constraintBottom_toBottomOf="@id/emailTextField"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/emailTextField" />
-
-                    <EditText
-                        android:id="@+id/emailTextField"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:hint="@string/hint_email"
-                        android:imeOptions="actionDone"
-                        android:inputType="textEmailAddress"
-                        android:text="@{contactInfo.email}"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/emailIconIv"
-                        app:layout_constraintTop_toBottomOf="@id/nameTextField" />
-
-                    <ImageView
-                        android:id="@+id/phoneIconIv"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:contentDescription="@string/content_desc_phone_icon"
-                        android:src="@drawable/ic_phone"
-                        app:layout_constraintBottom_toBottomOf="@id/phoneTextField"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/phoneTextField" />
-
-                    <EditText
-                        android:id="@+id/phoneTextField"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:hint="@string/hint_phone"
-                        android:imeOptions="actionDone"
-                        android:inputType="phone"
-                        android:text="@{contactInfo.phone}"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/phoneIconIv"
-                        app:layout_constraintTop_toBottomOf="@id/emailTextField" />
-
-                </android.support.constraint.ConstraintLayout>
-
-                <TextView
-                    style="@style/SectionHeaderTextStyle"
-                    android:text="@string/text_pickup_schedule" />
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@android:color/white"
-                    android:paddingBottom="16dp"
-                    android:paddingEnd="20dp"
-                    android:paddingStart="20dp"
-                    android:paddingTop="16dp">
-
-                    <TextView
-                        android:id="@+id/pickupScheduleDescTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:text="@string/text_pickup_schedule_desc"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/dateIconIv"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:contentDescription="@string/content_desc_date_icon"
-                        android:src="@drawable/ic_date"
-                        app:layout_constraintBottom_toBottomOf="@id/datePickerTextField"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/datePickerTextField" />
-
-                    <EditText
-                        android:id="@+id/datePickerTextField"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="@string/hint_date"
-                        android:inputType="date"
-                        android:text="@{DateFormatter.formatLongDate(pickupSchedule)}"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/dateIconIv"
-                        app:layout_constraintTop_toBottomOf="@id/pickupScheduleDescTv"
-                        tools:text="Friday, April 13" />
-
-                    <ImageView
-                        android:id="@+id/timeIconIv"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:contentDescription="@string/content_desc_time_icon"
-                        android:src="@drawable/ic_time"
-                        app:layout_constraintBottom_toBottomOf="@id/timePickerTextField"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/timePickerTextField" />
-
-                    <EditText
-                        android:id="@+id/timePickerTextField"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="@string/hint_time"
-                        android:inputType="time"
-                        android:text="@{DateFormatter.formatTime(pickupSchedule)}"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/timeIconIv"
-                        app:layout_constraintTop_toBottomOf="@id/datePickerTextField"
-                        tools:text="11 : 00 AM" />
-
-                </android.support.constraint.ConstraintLayout>
-
-                <TextView
-                    style="@style/SectionHeaderTextStyle"
-                    android:text="@string/text_store_address" />
-
-                <fragment
-                    android:id="@+id/mapFragment"
-                    android:name="com.google.android.gms.maps.MapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@android:color/darker_gray" />
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:paddingBottom="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="24dp"
-                    android:paddingTop="16dp">
-
-                    <TextView
-                        android:id="@+id/storeNameTv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:text="@{storeInfo.name}"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textSize="20sp"
-                        app:layout_constraintEnd_toStartOf="@id/directionsIcon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/storeAddressTv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginTop="8dp"
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:text="@{storeInfo.address}"
-                        app:layout_constraintEnd_toStartOf="@id/directionsIcon"
-                        app:layout_constraintStart_toStartOf="@id/storeNameTv"
-                        app:layout_constraintTop_toBottomOf="@id/storeNameTv"
-                        tools:text="2700 Aquitaine Ave, Mississauga, ON L5N 3J6" />
-
-                    <TextView
-                        android:id="@+id/storePhoneNumberTv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginTop="8dp"
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:text="@{storeInfo.phone}"
-                        app:layout_constraintEnd_toStartOf="@id/directionsIcon"
-                        app:layout_constraintStart_toStartOf="@id/storeNameTv"
-                        app:layout_constraintTop_toBottomOf="@id/storeAddressTv"
-                        tools:text="+1 (647) 123-4567" />
-
-                    <View
-                        android:id="@+id/directionsIcon"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/ic_directions"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </android.support.constraint.ConstraintLayout>
-
-                <TextView
-                    style="@style/SectionHeaderTextStyle"
-                    android:text="@string/text_payment_options" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@android:color/white"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingBottom="8dp"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="24dp"
-                    android:paddingTop="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/text_cash_on_pickup"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textSize="16sp" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true" />
-
-                </LinearLayout>
-
-                <include
-                    android:id="@+id/placeOrderButton"
-                    layout="@layout/layout_cart_bottom_bar_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/cart_bottom_bar_button_height"
-                    android:layout_marginTop="32dp"
-                    android:visibility="@{state == State.SUCCESS ? View.VISIBLE : View.GONE}"
-                    bind:buttonLabel="@{@string/label_place_order}"
-                    bind:cartQuantity="@{cartQuantity}"
-                    bind:cartSubtotal="@{cartSubtotal}" />
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="16sp"
+                    tools:text="$ 80" />
 
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+            <TextView
+                style="@style/SectionHeaderTextStyle"
+                android:text="@string/text_contact_info" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="@{state == State.LOADING ? View.VISIBLE : View.GONE}" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:paddingStart="20dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="16dp">
 
-        <TextView
-            android:id="@+id/errorTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/message_no_items_found"
-            android:visibility="@{state == State.ERROR ? View.VISIBLE : View.GONE}" />
+                <ImageView
+                    android:id="@+id/nameIconIv"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:contentDescription="@string/content_desc_account_icon"
+                    android:src="@drawable/ic_account"
+                    app:layout_constraintBottom_toBottomOf="@id/nameTextField"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/nameTextField" />
 
-    </android.support.design.widget.CoordinatorLayout>
+                <EditText
+                    android:id="@+id/nameTextField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:hint="@string/hint_name"
+                    android:imeOptions="actionDone"
+                    android:inputType="textNoSuggestions"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/nameIconIv"
+                    tools:ignore="Autofill" />
 
-</layout>
+                <ImageView
+                    android:id="@+id/emailIconIv"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:contentDescription="@string/content_desc_email_icon"
+                    android:src="@drawable/ic_email"
+                    app:layout_constraintBottom_toBottomOf="@id/emailTextField"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/emailTextField" />
+
+                <EditText
+                    android:id="@+id/emailTextField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/hint_email"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/emailIconIv"
+                    app:layout_constraintTop_toBottomOf="@id/nameTextField"
+                    tools:ignore="Autofill" />
+
+                <ImageView
+                    android:id="@+id/phoneIconIv"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:contentDescription="@string/content_desc_phone_icon"
+                    android:src="@drawable/ic_phone"
+                    app:layout_constraintBottom_toBottomOf="@id/phoneTextField"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/phoneTextField" />
+
+                <EditText
+                    android:id="@+id/phoneTextField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/hint_phone"
+                    android:imeOptions="actionDone"
+                    android:inputType="phone"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/phoneIconIv"
+                    app:layout_constraintTop_toBottomOf="@id/emailTextField"
+                    tools:ignore="Autofill" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                style="@style/SectionHeaderTextStyle"
+                android:text="@string/text_pickup_schedule" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:paddingStart="20dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/pickupScheduleDescTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/text_pickup_schedule_desc"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/dateIconIv"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:contentDescription="@string/content_desc_date_icon"
+                    android:src="@drawable/ic_date"
+                    app:layout_constraintBottom_toBottomOf="@id/datePickerTextField"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/datePickerTextField" />
+
+                <EditText
+                    android:id="@+id/datePickerTextField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/hint_date"
+                    android:inputType="date"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dateIconIv"
+                    app:layout_constraintTop_toBottomOf="@id/pickupScheduleDescTv"
+                    tools:ignore="Autofill"
+                    tools:text="Friday, April 13" />
+
+                <ImageView
+                    android:id="@+id/timeIconIv"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:contentDescription="@string/content_desc_time_icon"
+                    android:src="@drawable/ic_time"
+                    app:layout_constraintBottom_toBottomOf="@id/timePickerTextField"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/timePickerTextField" />
+
+                <EditText
+                    android:id="@+id/timePickerTextField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/hint_time"
+                    android:inputType="time"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/timeIconIv"
+                    app:layout_constraintTop_toBottomOf="@id/datePickerTextField"
+                    tools:ignore="Autofill"
+                    tools:text="11 : 00 AM" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                style="@style/SectionHeaderTextStyle"
+                android:text="@string/text_store_address" />
+
+            <fragment
+                android:id="@+id/mapFragment"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/darker_gray" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/storeNameTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@id/directionsIcon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Pencake" />
+
+                <TextView
+                    android:id="@+id/storeAddressTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    app:layout_constraintEnd_toStartOf="@id/directionsIcon"
+                    app:layout_constraintStart_toStartOf="@id/storeNameTv"
+                    app:layout_constraintTop_toBottomOf="@id/storeNameTv"
+                    tools:text="2700 Aquitaine Ave, Mississauga, ON L5N 3J6" />
+
+                <TextView
+                    android:id="@+id/storePhoneNumberTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    app:layout_constraintEnd_toStartOf="@id/directionsIcon"
+                    app:layout_constraintStart_toStartOf="@id/storeNameTv"
+                    app:layout_constraintTop_toBottomOf="@id/storeAddressTv"
+                    tools:text="+1 (647) 123-4567" />
+
+                <View
+                    android:id="@+id/directionsIcon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/ic_directions"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                style="@style/SectionHeaderTextStyle"
+                android:text="@string/text_payment_options" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="24dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/text_cash_on_pickup"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/placeOrderButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cart_bottom_bar_button_height"
+                android:layout_marginTop="32dp"
+                android:background="@color/colorAccent"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:id="@+id/cartQuantityTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:background="@drawable/background_square_border"
+                    android:gravity="center"
+                    android:minWidth="28dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    tools:text="2" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/label_place_order"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cartSubtotalTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="$ 40" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/errorTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/message_no_items_found" />
+
+</android.support.design.widget.CoordinatorLayout>

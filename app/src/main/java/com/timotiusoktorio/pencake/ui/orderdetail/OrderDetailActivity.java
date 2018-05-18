@@ -26,7 +26,6 @@ import com.timotiusoktorio.pencake.data.model.Order;
 import com.timotiusoktorio.pencake.data.model.StoreInfo;
 import com.timotiusoktorio.pencake.databinding.ActivityOrderDetailBinding;
 import com.timotiusoktorio.pencake.ui.BaseActivity;
-import com.timotiusoktorio.pencake.ui.adapters.CartRvAdapter;
 
 import javax.inject.Inject;
 
@@ -66,8 +65,8 @@ public class OrderDetailActivity extends BaseActivity implements OnMapReadyCallb
         final Order order = Order.fromJson(orderJson);
         binding.setOrder(order);
 
-        CartRvAdapter adapter = new CartRvAdapter(order.getCart());
-        binding.cartRv.setAdapter(adapter);
+//        CartRvAdapter adapter = new CartRvAdapter(order.getCart());
+//        binding.cartRv.setAdapter(adapter);
         binding.cartRv.setLayoutManager(new LinearLayoutManager(this));
         binding.cartRv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         binding.cartRv.setHasFixedSize(true);

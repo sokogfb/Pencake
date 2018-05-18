@@ -38,8 +38,27 @@ class MenuFragment : Fragment() {
         requireActivity().setTitle(R.string.label_menu)
 
         withViewModel({ MenuFragmentViewModel(dataManager) }) {
-            observe(categoriesLiveData, ::updateData)
             observe(stateLiveData, ::updateState)
+            observe(categoriesLiveData, ::updateData)
+        }
+    }
+
+    private fun updateState(state: KState?) {
+        state?.let {
+            when (it) {
+                KState.LOADING -> {
+                    progressBar.visibility = View.VISIBLE
+                    errorTv.visibility = View.GONE
+                }
+                KState.SUCCESS -> {
+                    progressBar.visibility = View.GONE
+                    errorTv.visibility = View.GONE
+                }
+                KState.ERROR -> {
+                    progressBar.visibility = View.GONE
+                    errorTv.visibility = View.VISIBLE
+                }
+            }
         }
     }
 
@@ -48,31 +67,6 @@ class MenuFragment : Fragment() {
             viewPager.adapter = PagerAdapter(requireFragmentManager(), data)
             tabLayout.setupWithViewPager(viewPager)
         }
-    }
-
-    private fun updateState(state: KState?) {
-        state?.let {
-            when (it) {
-                KState.LOADING -> showLoading()
-                KState.SUCCESS -> showData()
-                KState.ERROR -> showError()
-            }
-        }
-    }
-
-    private fun showLoading() {
-        progressBar.visibility = View.VISIBLE
-        errorTv.visibility = View.GONE
-    }
-
-    private fun showData() {
-        progressBar.visibility = View.GONE
-        errorTv.visibility = View.GONE
-    }
-
-    private fun showError() {
-        progressBar.visibility = View.GONE
-        errorTv.visibility = View.VISIBLE
     }
 
     private inner class PagerAdapter(fm: FragmentManager, val categories: List<Category>) : FragmentStatePagerAdapter(fm) {

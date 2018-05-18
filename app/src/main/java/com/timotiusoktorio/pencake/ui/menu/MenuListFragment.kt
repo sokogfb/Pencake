@@ -47,41 +47,35 @@ class MenuListFragment : Fragment() {
                 ?: throw IllegalStateException("Category ID was not sent here as an argument")
 
         withViewModel({ MenuListFragmentViewModel(dataManager, categoryId) }) {
-            observe(productsLiveData, ::updateData)
             observe(stateLiveData, ::updateState)
+            observe(productsLiveData, ::updateData)
         }
-    }
-
-    private fun updateData(data: List<Product>?) {
-        data?.let { rvAdapter.updateData(it) }
     }
 
     private fun updateState(state: KState?) {
         state?.let {
             when (it) {
-                KState.LOADING -> showLoading()
-                KState.SUCCESS -> showData()
-                KState.ERROR -> showError()
+                KState.LOADING -> {
+                    productsRv.visibility = View.INVISIBLE
+                    progressBar.visibility = View.VISIBLE
+                    errorTv.visibility = View.GONE
+                }
+                KState.SUCCESS -> {
+                    productsRv.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
+                    errorTv.visibility = View.GONE
+                }
+                KState.ERROR -> {
+                    productsRv.visibility = View.GONE
+                    progressBar.visibility = View.GONE
+                    errorTv.visibility = View.VISIBLE
+                }
             }
         }
     }
 
-    private fun showLoading() {
-        productsRv.visibility = View.INVISIBLE
-        progressBar.visibility = View.VISIBLE
-        errorTv.visibility = View.GONE
-    }
-
-    private fun showData() {
-        productsRv.visibility = View.VISIBLE
-        progressBar.visibility = View.GONE
-        errorTv.visibility = View.GONE
-    }
-
-    private fun showError() {
-        productsRv.visibility = View.INVISIBLE
-        progressBar.visibility = View.GONE
-        errorTv.visibility = View.VISIBLE
+    private fun updateData(data: List<Product>?) {
+        data?.let { rvAdapter.updateData(it) }
     }
 
     companion object {

@@ -8,8 +8,8 @@ import com.timotiusoktorio.pencake.data.source.DataManager
 
 class MenuListFragmentViewModel(private val dataManager: DataManager, private val categoryId: String) : ViewModel() {
 
-    val productsLiveData = MutableLiveData<List<Product>>()
     val stateLiveData = MutableLiveData<KState>()
+    val productsLiveData = MutableLiveData<List<Product>>()
 
     init {
         loadProducts()
