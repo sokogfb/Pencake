@@ -113,7 +113,7 @@ class CartActivity : BaseActivity(), DatePickerDialog.OnDateSetListener, TimePic
     }
 
     private fun initViews() {
-        rvAdapter = CartRvAdapter(mutableListOf()) {
+        rvAdapter = CartRvAdapter {
             startActivity<AddToCartActivity>(AddToCartActivity.EXTRA_BUNDLE to bundleOf(
                     AddToCartActivity.KEY_PRODUCT_JSON to it.productJson,
                     AddToCartActivity.KEY_CART_ITEM_JSON to it.toJson()))

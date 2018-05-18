@@ -10,7 +10,7 @@ import com.timotiusoktorio.pencake.extensions.inflate
 import com.timotiusoktorio.pencake.extensions.loadUrl
 import kotlinx.android.synthetic.main.list_item_cart.view.*
 
-class CartRvAdapter(private val cart: MutableList<CartItem>,
+class CartRvAdapter(private val cart: MutableList<CartItem> = mutableListOf(),
                     private val listener: (CartItem) -> Unit) : RecyclerView.Adapter<CartRvAdapter.ViewHolder>() {
 
     fun updateData(data: List<CartItem>) {

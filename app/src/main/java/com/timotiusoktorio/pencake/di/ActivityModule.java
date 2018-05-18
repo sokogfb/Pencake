@@ -4,7 +4,6 @@ import com.timotiusoktorio.pencake.data.source.DataManager;
 import com.timotiusoktorio.pencake.ui.BaseActivity;
 import com.timotiusoktorio.pencake.ui.favorites.FavoritesViewModelFactory;
 import com.timotiusoktorio.pencake.ui.orderdetail.OrderDetailViewModelFactory;
-import com.timotiusoktorio.pencake.ui.orders.OrdersListFragmentViewModelFactory;
 import com.timotiusoktorio.pencake.ui.profile.ProfileViewModelFactory;
 
 import dagger.Module;
@@ -17,11 +16,6 @@ public class ActivityModule {
 
     public ActivityModule(BaseActivity activity) {
         this.activity = activity;
-    }
-
-    @Provides
-    public OrdersListFragmentViewModelFactory provideOrdersListFragmentViewModelFactory(DataManager dataManager) {
-        return new OrdersListFragmentViewModelFactory(dataManager);
     }
 
     @Provides

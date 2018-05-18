@@ -1,66 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:foreground="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp">
 
-    <data>
-
-        <import type="com.timotiusoktorio.pencake.util.DateFormatter" />
-
-        <variable
-            name="order"
-            type="com.timotiusoktorio.pencake.data.model.Order" />
-
-    </data>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/orderDateTv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="12dp"
-        android:paddingTop="12dp">
+        android:layout_marginStart="24dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        tools:text="Mar 25" />
 
-        <TextView
-            android:id="@+id/orderDateTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="@{DateFormatter.formatShortDate(order.orderDate)}"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            tools:text="Mar 25" />
+    <TextView
+        android:id="@+id/totalOrderedTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
+        tools:text="2 items ordered" />
 
-        <TextView
-            android:id="@+id/totalOrderedTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@{@plurals/total_items_ordered(order.cart.size, order.cart.size)}"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="16sp"
-            tools:text="2 items ordered" />
+    <TextView
+        android:id="@+id/orderSubtotalTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/colorOrderSubtotal"
+        android:textSize="16sp"
+        tools:text="$ 40" />
 
-        <TextView
-            android:id="@+id/orderSubtotalTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@{@string/string_format_price(order.subtotal)}"
-            android:textColor="@color/colorOrderSubtotal"
-            android:textSize="16sp"
-            tools:text="$ 40" />
+    <View
+        android:layout_width="36sp"
+        android:layout_height="36sp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_arrow_right" />
 
-        <View
-            android:layout_width="36sp"
-            android:layout_height="36sp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/ic_arrow_right" />
-
-    </LinearLayout>
-
-</layout>
+</LinearLayout>
