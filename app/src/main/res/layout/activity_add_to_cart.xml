@@ -40,10 +40,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@android:color/white"
-                android:paddingStart="20dp"
-                android:paddingTop="8dp"
+                android:paddingBottom="12dp"
                 android:paddingEnd="20dp"
-                android:paddingBottom="12dp">
+                android:paddingStart="20dp"
+                android:paddingTop="8dp">
 
                 <EditText
                     android:id="@+id/specialRequestsTextField"
@@ -61,8 +61,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
+                android:layout_marginTop="32dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -107,8 +107,8 @@
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
         <TextView
             android:id="@+id/cartQuantityTv"
@@ -117,8 +117,8 @@
             android:background="@drawable/background_square_border"
             android:gravity="center"
             android:minWidth="28dp"
-            android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:paddingStart="8dp"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             tools:text="2" />

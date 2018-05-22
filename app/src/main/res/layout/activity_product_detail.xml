@@ -133,8 +133,8 @@
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:paddingStart="16dp"
         android:visibility="gone"
         tools:visibility="visible">
 
@@ -145,8 +145,8 @@
             android:background="@drawable/background_square_border"
             android:gravity="center"
             android:minWidth="28dp"
-            android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:paddingStart="8dp"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             tools:text="2" />

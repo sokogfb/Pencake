@@ -32,6 +32,7 @@ class ProductDetailActivity : BaseActivity() {
         component.inject(this)
 
         val product = Product.fromJson(intent.getStringExtra(EXTRA_PRODUCT_JSON))
+                ?: throw IllegalStateException("Product JSON was not sent here as intent extra")
 
         initActionBar()
         initViews(product)

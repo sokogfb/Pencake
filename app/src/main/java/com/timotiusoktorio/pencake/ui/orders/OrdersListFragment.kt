@@ -15,8 +15,10 @@ import com.timotiusoktorio.pencake.extensions.observe
 import com.timotiusoktorio.pencake.extensions.withViewModel
 import com.timotiusoktorio.pencake.ui.BaseActivity
 import com.timotiusoktorio.pencake.ui.adapters.OrdersRvAdapter
+import com.timotiusoktorio.pencake.ui.orderdetail.OrderDetailActivity
 import kotlinx.android.synthetic.main.fragment_orders_list.*
 import org.jetbrains.anko.bundleOf
+import org.jetbrains.anko.support.v4.startActivity
 import javax.inject.Inject
 
 class OrdersListFragment : Fragment() {
@@ -32,7 +34,7 @@ class OrdersListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvAdapter = OrdersRvAdapter {
-            // TODO: Start OrderDetailActivity
+            startActivity<OrderDetailActivity>(OrderDetailActivity.EXTRA_ORDER_JSON to it.toJson())
         }
         ordersRv.adapter = rvAdapter
         ordersRv.layoutManager = LinearLayoutManager(activity)

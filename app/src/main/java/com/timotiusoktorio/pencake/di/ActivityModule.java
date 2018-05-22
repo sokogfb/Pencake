@@ -3,7 +3,6 @@ package com.timotiusoktorio.pencake.di;
 import com.timotiusoktorio.pencake.data.source.DataManager;
 import com.timotiusoktorio.pencake.ui.BaseActivity;
 import com.timotiusoktorio.pencake.ui.favorites.FavoritesViewModelFactory;
-import com.timotiusoktorio.pencake.ui.orderdetail.OrderDetailViewModelFactory;
 import com.timotiusoktorio.pencake.ui.profile.ProfileViewModelFactory;
 
 import dagger.Module;
@@ -16,11 +15,6 @@ public class ActivityModule {
 
     public ActivityModule(BaseActivity activity) {
         this.activity = activity;
-    }
-
-    @Provides
-    public OrderDetailViewModelFactory provideOrderDetailActivityViewModelFactory(DataManager dataManager) {
-        return new OrderDetailViewModelFactory(dataManager);
     }
 
     @Provides

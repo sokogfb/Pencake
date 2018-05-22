@@ -1,310 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data>
-
-        <import type="com.timotiusoktorio.pencake.util.DateFormatter" />
-
-        <variable
-            name="order"
-            type="com.timotiusoktorio.pencake.data.model.Order" />
-
-        <variable
-            name="storeInfo"
-            type="com.timotiusoktorio.pencake.data.model.StoreInfo" />
-
-    </data>
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/orderDateTv"
+            style="@style/SectionHeaderTextStyle"
+            tools:text="Ordered on May 22, 2018" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cartRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:itemCount="1"
+            tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:listitem="@layout/list_item_cart" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:paddingEnd="24dp"
+            android:paddingStart="24dp"
+            android:paddingTop="16dp">
 
             <TextView
-                android:id="@+id/orderDateTv"
-                style="@style/SectionHeaderTextStyle"
-                android:text="@{@string/string_format_order_date(DateFormatter.formatLongerDate(order.orderDate))}" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/cartRv"
-                android:layout_width="match_parent"
+                android:id="@+id/subtotalLabelTv"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:orientation="horizontal"
-                android:paddingBottom="16dp"
-                android:paddingEnd="24dp"
-                android:paddingStart="24dp"
-                android:paddingTop="16dp">
-
-                <TextView
-                    android:id="@+id/subtotalLabelTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/text_cash_on_pickup"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/subtotalTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@{@string/string_format_price(order.subtotal)}"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    tools:text="$ 80" />
-
-            </LinearLayout>
+                android:layout_weight="1"
+                android:text="@string/text_cash_on_pickup"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp" />
 
             <TextView
-                style="@style/SectionHeaderTextStyle"
-                android:text="@string/text_order_status" />
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
+                android:id="@+id/subtotalTv"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/white"
-                android:paddingBottom="16dp"
-                android:paddingEnd="24dp"
-                android:paddingStart="24dp"
-                android:paddingTop="16dp">
-
-                <TextView
-                    android:id="@+id/orderStatusLabelTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_order_status_colon"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/orderStatusTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textColor="@color/colorOrderSubtotal"
-                    android:textSize="16sp"
-                    app:layout_constraintBaseline_toBaselineOf="@id/orderStatusLabelTv"
-                    app:layout_constraintStart_toEndOf="@id/orderStatusLabelTv"
-                    tools:text="Order placed" />
-
-                <TextView
-                    android:id="@+id/pickupReadyDateLabelTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/text_ready_for_pickup"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/orderStatusLabelTv" />
-
-                <TextView
-                    android:id="@+id/pickupReadyDateTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textColor="@color/colorOrderSubtotal"
-                    android:textSize="16sp"
-                    app:layout_constraintBaseline_toBaselineOf="@id/pickupReadyDateLabelTv"
-                    app:layout_constraintStart_toEndOf="@id/pickupReadyDateLabelTv"
-                    tools:text="Sunday, Apr 22" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            <TextView
-                style="@style/SectionHeaderTextStyle"
-                android:text="@string/text_contact_info" />
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/white"
-                android:paddingBottom="16dp"
-                android:paddingEnd="20dp"
-                android:paddingStart="20dp"
-                android:paddingTop="16dp">
-
-                <ImageView
-                    android:id="@+id/nameIconIv"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:contentDescription="@string/content_desc_account_icon"
-                    android:src="@drawable/ic_account"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/nameTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@{order.contactInfo.name}"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/nameIconIv"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/nameIconIv"
-                    app:layout_constraintTop_toTopOf="@id/nameIconIv" />
-
-                <ImageView
-                    android:id="@+id/emailIconIv"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="8dp"
-                    android:contentDescription="@string/content_desc_email_icon"
-                    android:src="@drawable/ic_email"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/nameIconIv" />
-
-                <TextView
-                    android:id="@+id/emailTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@{order.contactInfo.email}"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/emailIconIv"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/emailIconIv"
-                    app:layout_constraintTop_toTopOf="@id/emailIconIv" />
-
-                <ImageView
-                    android:id="@+id/phoneIconIv"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="8dp"
-                    android:contentDescription="@string/content_desc_phone_icon"
-                    android:src="@drawable/ic_phone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/emailIconIv" />
-
-                <TextView
-                    android:id="@+id/phoneTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@{order.contactInfo.phone}"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/phoneIconIv"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/phoneIconIv"
-                    app:layout_constraintTop_toTopOf="@id/phoneIconIv" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            <TextView
-                style="@style/SectionHeaderTextStyle"
-                android:text="@string/text_store_address" />
-
-            <fragment
-                android:id="@+id/mapFragment"
-                android:name="com.google.android.gms.maps.MapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/darker_gray" />
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:paddingBottom="16dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="24dp"
-                android:paddingTop="16dp">
-
-                <TextView
-                    android:id="@+id/storeNameTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:text="@{storeInfo.name}"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toStartOf="@id/directionsIcon"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/storeAddressTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:text="@{storeInfo.address}"
-                    app:layout_constraintEnd_toStartOf="@id/directionsIcon"
-                    app:layout_constraintStart_toStartOf="@id/storeNameTv"
-                    app:layout_constraintTop_toBottomOf="@id/storeNameTv"
-                    tools:text="2700 Aquitaine Ave, Mississauga, ON L5N 3J6" />
-
-                <TextView
-                    android:id="@+id/storePhoneNumberTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:text="@{storeInfo.phone}"
-                    app:layout_constraintEnd_toStartOf="@id/directionsIcon"
-                    app:layout_constraintStart_toStartOf="@id/storeNameTv"
-                    app:layout_constraintTop_toBottomOf="@id/storeAddressTv"
-                    tools:text="+1 (647) 123-4567" />
-
-                <View
-                    android:id="@+id/directionsIcon"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/ic_directions"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp"
-                android:text="@string/text_contact_us_header" />
-
-            <Button
-                android:id="@+id/contactUsButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="64dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/label_contact_us" />
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp"
+                tools:text="$ 80" />
 
         </LinearLayout>
 
-    </ScrollView>
+        <TextView
+            style="@style/SectionHeaderTextStyle"
+            android:text="@string/text_order_status" />
 
-</layout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white"
+            android:paddingBottom="16dp"
+            android:paddingEnd="24dp"
+            android:paddingStart="24dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/orderStatusLabelTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_order_status_colon"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/orderStatusTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/colorOrderSubtotal"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/orderStatusLabelTv"
+                app:layout_constraintStart_toEndOf="@id/orderStatusLabelTv"
+                tools:text="Order placed" />
+
+            <TextView
+                android:id="@+id/pickupReadyDateLabelTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/text_ready_for_pickup"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/orderStatusLabelTv" />
+
+            <TextView
+                android:id="@+id/pickupReadyDateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/colorOrderSubtotal"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/pickupReadyDateLabelTv"
+                app:layout_constraintStart_toEndOf="@id/pickupReadyDateLabelTv"
+                tools:text="Sunday, Apr 22" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            style="@style/SectionHeaderTextStyle"
+            android:text="@string/text_contact_info" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white"
+            android:paddingBottom="16dp"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:paddingTop="16dp">
+
+            <ImageView
+                android:id="@+id/nameIconIv"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:contentDescription="@string/content_desc_account_icon"
+                android:src="@drawable/ic_account"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/nameIconIv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/nameIconIv"
+                app:layout_constraintTop_toTopOf="@id/nameIconIv"
+                tools:text="@tools:sample/full_names" />
+
+            <ImageView
+                android:id="@+id/emailIconIv"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/content_desc_email_icon"
+                android:src="@drawable/ic_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameIconIv" />
+
+            <TextView
+                android:id="@+id/emailTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/emailIconIv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/emailIconIv"
+                app:layout_constraintTop_toTopOf="@id/emailIconIv"
+                tools:text="gracie@gmail.com" />
+
+            <ImageView
+                android:id="@+id/phoneIconIv"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/content_desc_phone_icon"
+                android:src="@drawable/ic_phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/emailIconIv" />
+
+            <TextView
+                android:id="@+id/phoneTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/phoneIconIv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/phoneIconIv"
+                app:layout_constraintTop_toTopOf="@id/phoneIconIv"
+                tools:text="@tools:sample/us_phones" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            style="@style/SectionHeaderTextStyle"
+            android:text="@string/text_store_address" />
+
+        <fragment
+            android:id="@+id/mapFragment"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingBottom="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="24dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/storeNameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@id/directionsIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Pencake" />
+
+            <TextView
+                android:id="@+id/storeAddressTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:lines="1"
+                app:layout_constraintEnd_toStartOf="@id/directionsIcon"
+                app:layout_constraintStart_toStartOf="@id/storeNameTv"
+                app:layout_constraintTop_toBottomOf="@id/storeNameTv"
+                tools:text="2700 Aquitaine Ave, Mississauga, ON L5N 3J6" />
+
+            <TextView
+                android:id="@+id/storePhoneNumberTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:lines="1"
+                app:layout_constraintEnd_toStartOf="@id/directionsIcon"
+                app:layout_constraintStart_toStartOf="@id/storeNameTv"
+                app:layout_constraintTop_toBottomOf="@id/storeAddressTv"
+                tools:text="+1 (647) 123-4567" />
+
+            <View
+                android:id="@+id/directionsIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/ic_directions"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:text="@string/text_contact_us_header" />
+
+        <Button
+            android:id="@+id/contactUsButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="64dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_contact_us" />
+
+    </LinearLayout>
+
+</ScrollView>
