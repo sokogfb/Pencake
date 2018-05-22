@@ -205,7 +205,7 @@ class CartActivity : BaseActivity(), DatePickerDialog.OnDateSetListener, TimePic
 
     private fun updatePickupSchedule(pickupSchedule: Calendar?) {
         pickupSchedule?.let {
-            datePickerTextField.setText(it.time.toLongDateFormat())
+            datePickerTextField.setText(it.time.toMediumDateFormat())
             timePickerTextField.setText(it.time.toTimeFormat())
         }
     }
