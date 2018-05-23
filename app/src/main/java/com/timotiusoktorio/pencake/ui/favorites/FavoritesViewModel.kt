@@ -2,13 +2,13 @@ package com.timotiusoktorio.pencake.ui.favorites
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.timotiusoktorio.pencake.data.model.KState
+import com.timotiusoktorio.pencake.data.model.State
 import com.timotiusoktorio.pencake.data.model.Product
 import com.timotiusoktorio.pencake.data.source.DataManager
 
 class FavoritesViewModel(private val dataManager: DataManager) : ViewModel() {
 
-    val stateLiveData = MutableLiveData<KState>()
+    val stateLiveData = MutableLiveData<State>()
     val productsLiveData = MutableLiveData<List<Product>>()
 
     init {
@@ -16,15 +16,15 @@ class FavoritesViewModel(private val dataManager: DataManager) : ViewModel() {
     }
 
     private fun loadFavorites() {
-        stateLiveData.value = KState.LOADING
+        stateLiveData.value = State.LOADING
         dataManager.fetchFavorites(object : DataManager.Callback<Product> {
             override fun onSuccess(data: MutableList<Product>) {
                 productsLiveData.value = data
-                stateLiveData.value = KState.SUCCESS
+                stateLiveData.value = State.SUCCESS
             }
 
             override fun onError(errorMsg: String) {
-                stateLiveData.value = KState.ERROR
+                stateLiveData.value = State.ERROR
             }
         })
     }

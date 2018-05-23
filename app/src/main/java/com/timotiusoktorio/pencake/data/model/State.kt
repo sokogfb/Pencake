@@ -1,6 +1,6 @@
 package com.timotiusoktorio.pencake.data.model
 
-enum class KState {
+enum class State {
 
     LOADING, SUCCESS, ERROR
 }

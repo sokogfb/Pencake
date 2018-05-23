@@ -69,7 +69,7 @@ class OrderDetailActivity : BaseActivity(), OnMapReadyCallback {
     }
 
     private fun initViews(order: Order) {
-        val rvAdapter = CartRvAdapter(order.cart) {}
+        val rvAdapter = CartRvAdapter(order.cart.toMutableList()) {}
         cartRv.adapter = rvAdapter
         cartRv.layoutManager = LinearLayoutManager(this)
         cartRv.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))

@@ -21,7 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.timotiusoktorio.pencake.R
 import com.timotiusoktorio.pencake.data.model.CartItem
 import com.timotiusoktorio.pencake.data.model.ContactInfo
-import com.timotiusoktorio.pencake.data.model.KState
+import com.timotiusoktorio.pencake.data.model.State
 import com.timotiusoktorio.pencake.data.model.StoreInfo
 import com.timotiusoktorio.pencake.data.source.DataManager
 import com.timotiusoktorio.pencake.extensions.*
@@ -151,24 +151,24 @@ class CartActivity : BaseActivity(), DatePickerDialog.OnDateSetListener, TimePic
         }
     }
 
-    private fun updateState(state: KState?) {
+    private fun updateState(state: State?) {
         state?.let {
             when (it) {
-                KState.LOADING -> {
+                State.LOADING -> {
                     nestedScrollView.visibility = View.INVISIBLE
                     placeOrderButton.visibility = View.GONE
                     progressBar.visibility = View.VISIBLE
                     errorTv.visibility = View.GONE
                     clearCartMenuItem?.isVisible = false
                 }
-                KState.SUCCESS -> {
+                State.SUCCESS -> {
                     nestedScrollView.visibility = View.VISIBLE
                     placeOrderButton.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
                     errorTv.visibility = View.GONE
                     clearCartMenuItem?.isVisible = true
                 }
-                KState.ERROR -> {
+                State.ERROR -> {
                     nestedScrollView.visibility = View.GONE
                     placeOrderButton.visibility = View.GONE
                     progressBar.visibility = View.GONE

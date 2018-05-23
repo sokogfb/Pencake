@@ -63,14 +63,20 @@ class AddToCartViewModel(private val dataManager: DataManager,
     }
 
     private fun createCartItem() {
-        val newCartItem = CartItem(null, product.toJson(), selectedSizeIndex, quantityLiveData.value, subtotalLiveData.value, specialRequests)
+        val newCartItem = CartItem(
+                productJson = product.toJson(),
+                selectedSizeIndex = selectedSizeIndex,
+                quantity = quantityLiveData.value ?: 0,
+                subtotal = subtotalLiveData.value ?: 0,
+                specialRequests = specialRequests
+        )
         dataManager.addCartItem(newCartItem)
     }
 
     private fun updateCartItem(cartItem: CartItem) {
         cartItem.selectedSizeIndex = selectedSizeIndex
-        cartItem.quantity = quantityLiveData.value
-        cartItem.subtotal = subtotalLiveData.value
+        cartItem.quantity = quantityLiveData.value ?: cartItem.quantity
+        cartItem.subtotal = subtotalLiveData.value ?: cartItem.subtotal
         cartItem.specialRequests = specialRequests
         dataManager.updateCartItem(cartItem)
     }

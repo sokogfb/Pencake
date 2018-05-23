@@ -29,10 +29,12 @@ class CartRvAdapter(private val cart: MutableList<CartItem> = mutableListOf(),
 
         fun bind(cartItem: CartItem) = with(itemView) {
             val product = Product.fromJson(cartItem.productJson)
+                    ?: throw IllegalStateException("This CartItem contains a null product JSON")
+
             productNameTv.text = product.name
             quantityTv.text = context.getString(R.string.string_format_quantity, cartItem.quantity)
             productSizeTv.text = product.prices[cartItem.selectedSizeIndex].size
-            specialRequestsTv.text = if (cartItem.specialRequests.isNullOrEmpty()) context.getString(R.string.text_no_special_requests) else cartItem.specialRequests
+            specialRequestsTv.text = if (cartItem.specialRequests.isEmpty()) context.getString(R.string.text_no_special_requests) else cartItem.specialRequests
             subtotalTv.text = context.getString(R.string.string_format_price, cartItem.subtotal)
             productPhotoIv.loadUrl(product.imageUrls[0])
             setOnClickListener { listener(cartItem) }

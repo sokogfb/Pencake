@@ -8,7 +8,7 @@ import java.util.*
 
 class CartViewModel(private val dataManager: DataManager) : ViewModel() {
 
-    val stateLiveData = MutableLiveData<KState>()
+    val stateLiveData = MutableLiveData<State>()
     val cartLiveData = MutableLiveData<List<CartItem>>()
     val quantityLiveData = MutableLiveData<Int>()
     val subtotalLiveData = MutableLiveData<Int>()
@@ -26,16 +26,16 @@ class CartViewModel(private val dataManager: DataManager) : ViewModel() {
     }
 
     fun loadCart() {
-        stateLiveData.value = KState.LOADING
+        stateLiveData.value = State.LOADING
         dataManager.fetchCart(object : DataManager.Callback<CartItem> {
             override fun onSuccess(data: MutableList<CartItem>) {
                 cartLiveData.value = data
                 calculateQuantityAndSubtotal(data)
-                stateLiveData.value = KState.SUCCESS
+                stateLiveData.value = State.SUCCESS
             }
 
             override fun onError(errorMsg: String) {
-                stateLiveData.value = KState.ERROR
+                stateLiveData.value = State.ERROR
             }
         })
     }
@@ -110,12 +110,13 @@ class CartViewModel(private val dataManager: DataManager) : ViewModel() {
             placeOrderErrorFlagLiveData.value = true
             return
         }
-        val orderDate = Date().time
-        val cart = cartLiveData.value
-        val orderSubtotal = subtotalLiveData.value
-        val contactInfo = ContactInfo(name, email, phone)
-        val pickupSchedule = pickupScheduleLiveData.value?.time?.time ?: 0
-        val order = Order(null, orderDate, cart, orderSubtotal, contactInfo, pickupSchedule, null, OrderStatus.ORDER_PLACED, false)
+        val order = Order(
+                orderDate = Date().time,
+                cart = cartLiveData.value ?: emptyList(),
+                subtotal = subtotalLiveData.value ?: 0,
+                contactInfo = ContactInfo(name, email, phone),
+                pickupSchedule = pickupScheduleLiveData.value?.time?.time ?: 0
+        )
         dataManager.addOrder(order)
         exitFlagLiveData.value = true
     }

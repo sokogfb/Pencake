@@ -33,6 +33,8 @@ class AddToCartActivity : BaseActivity(), ConfirmationDialogFragment.OnConfirmat
 
         val bundle = intent.getBundleExtra(EXTRA_BUNDLE)
         val product = Product.fromJson(bundle.getString(KEY_PRODUCT_JSON))
+                ?: throw IllegalStateException("Product JSON was not sent here as intent extra")
+
         val cartItem = CartItem.fromJson(bundle.getString(KEY_CART_ITEM_JSON))
         isUpdating = (cartItem != null)
 

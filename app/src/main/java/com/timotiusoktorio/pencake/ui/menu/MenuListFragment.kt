@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.timotiusoktorio.pencake.R
-import com.timotiusoktorio.pencake.data.model.KState
+import com.timotiusoktorio.pencake.data.model.State
 import com.timotiusoktorio.pencake.data.model.Product
 import com.timotiusoktorio.pencake.data.source.DataManager
 import com.timotiusoktorio.pencake.extensions.observe
@@ -52,20 +52,20 @@ class MenuListFragment : Fragment() {
         }
     }
 
-    private fun updateState(state: KState?) {
+    private fun updateState(state: State?) {
         state?.let {
             when (it) {
-                KState.LOADING -> {
+                State.LOADING -> {
                     productsRv.visibility = View.INVISIBLE
                     progressBar.visibility = View.VISIBLE
                     errorTv.visibility = View.GONE
                 }
-                KState.SUCCESS -> {
+                State.SUCCESS -> {
                     productsRv.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
                     errorTv.visibility = View.GONE
                 }
-                KState.ERROR -> {
+                State.ERROR -> {
                     productsRv.visibility = View.GONE
                     progressBar.visibility = View.GONE
                     errorTv.visibility = View.VISIBLE
