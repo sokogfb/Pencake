@@ -28,7 +28,7 @@ class CartViewModel(private val dataManager: DataManager) : ViewModel() {
     fun loadCart() {
         stateLiveData.value = State.LOADING
         dataManager.fetchCart(object : DataManager.Callback<CartItem> {
-            override fun onSuccess(data: MutableList<CartItem>) {
+            override fun onSuccess(data: List<CartItem>) {
                 cartLiveData.value = data
                 calculateQuantityAndSubtotal(data)
                 stateLiveData.value = State.SUCCESS
@@ -52,12 +52,12 @@ class CartViewModel(private val dataManager: DataManager) : ViewModel() {
     }
 
     private fun loadContactInfo() {
-        val contactInfo = dataManager.orderContactInfo
+        val contactInfo = dataManager.getOrderContactInfo()
         contactInfoLiveData.value = contactInfo
     }
 
     private fun loadPickupSchedule() {
-        dataManager.orderPickupSchedule?.let {
+        dataManager.getOrderPickupSchedule()?.let {
             val calendar = Calendar.getInstance()
             calendar.time = it
             pickupScheduleLiveData.value = calendar

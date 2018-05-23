@@ -14,7 +14,7 @@ class ProductDetailViewModel(private val dataManager: DataManager, private val p
 
     fun loadCart() {
         dataManager.fetchCart(object : DataManager.Callback<CartItem> {
-            override fun onSuccess(data: MutableList<CartItem>) {
+            override fun onSuccess(data: List<CartItem>) {
                 var quantity = 0
                 var subtotal = 0
                 for (cartItem in data) {
@@ -49,7 +49,7 @@ class ProductDetailViewModel(private val dataManager: DataManager, private val p
             favoriteFlagLiveData.value = !it
             if (it) dataManager.deleteFavorite(product)
             else dataManager.addFavorite(product)
-            dataManager.favoritesUpdatedFlag = true
+            dataManager.saveFavoritesUpdatedFlag(true)
         }
     }
 }

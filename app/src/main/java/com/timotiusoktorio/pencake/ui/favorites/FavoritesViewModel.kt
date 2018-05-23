@@ -2,8 +2,8 @@ package com.timotiusoktorio.pencake.ui.favorites
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.timotiusoktorio.pencake.data.model.State
 import com.timotiusoktorio.pencake.data.model.Product
+import com.timotiusoktorio.pencake.data.model.State
 import com.timotiusoktorio.pencake.data.source.DataManager
 
 class FavoritesViewModel(private val dataManager: DataManager) : ViewModel() {
@@ -18,7 +18,7 @@ class FavoritesViewModel(private val dataManager: DataManager) : ViewModel() {
     private fun loadFavorites() {
         stateLiveData.value = State.LOADING
         dataManager.fetchFavorites(object : DataManager.Callback<Product> {
-            override fun onSuccess(data: MutableList<Product>) {
+            override fun onSuccess(data: List<Product>) {
                 productsLiveData.value = data
                 stateLiveData.value = State.SUCCESS
             }
@@ -30,8 +30,8 @@ class FavoritesViewModel(private val dataManager: DataManager) : ViewModel() {
     }
 
     fun refreshFavorites() {
-        if (dataManager.favoritesUpdatedFlag) {
-            dataManager.favoritesUpdatedFlag = false
+        if (dataManager.getFavoritesUpdatedFlag()) {
+            dataManager.saveFavoritesUpdatedFlag(false)
             loadFavorites()
         }
     }

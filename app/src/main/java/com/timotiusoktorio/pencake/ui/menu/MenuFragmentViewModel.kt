@@ -18,7 +18,7 @@ class MenuFragmentViewModel(private val dataManager: DataManager) : ViewModel() 
     private fun loadCategories() {
         stateLiveData.value = State.LOADING
         dataManager.fetchCategories(object : DataManager.Callback<Category> {
-            override fun onSuccess(data: MutableList<Category>) {
+            override fun onSuccess(data: List<Category>) {
                 categoriesLiveData.value = data
                 stateLiveData.value = State.SUCCESS
             }

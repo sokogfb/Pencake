@@ -51,7 +51,6 @@ class ProfileViewModel(private val dataManager: DataManager) : ViewModel() {
 
     fun signOut() {
         FirebaseAuth.getInstance().signOut()
-        dataManager.removeFavoriteList()
         signOutSuccessFlagLiveData.value = true
     }
 }
