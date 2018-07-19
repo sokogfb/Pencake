@@ -41,7 +41,7 @@ dependencies {
     implementation "com.android.support:customtabs:$support_lib_version"
     implementation "com.android.support:design:$support_lib_version"
     implementation "com.android.support:exifinterface:$support_lib_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
     implementation "android.arch.lifecycle:extensions:$arch_components_version"
     kapt "android.arch.lifecycle:compiler:$arch_components_version"
