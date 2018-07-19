@@ -24,6 +24,15 @@ Users can use this app to browse all available cakes, make orders, and find info
 - Using [Firebase Authentication](https://firebase.google.com/docs/auth/) to authenticate user to the app.
 - Using [Google Maps SDK for Android](https://developers.google.com/maps/documentation/android-sdk/intro) to display a map in the app.
 
-<br><img src="screenshots/screenshot_1.png" width="360" height="640" /> <img src="screenshots/screenshot_2.png" width="360" height="640" />
+### Google Maps API key configuration
+This project uses Google Maps SDK for Android and requires an API key to use. For security purposes, the API key is hidden from the project. To use this project, you need to create your own API key and add it to the project.
 
-Get the apk file [here](https://github.com/toktorio/Cake-Ordering-App/blob/master/app/release/cake-ordering-app.apk?raw=true) to install the app on your device. Note that depending on your device settings, you might need to allow installation from unknown sources in order to install this app. Visit this [link](https://www.androidcentral.com/unknown-sources) for the detailed instructions.
+When this project is opened the first time, there will be Gradle sync error because the project can not find the API key. To fix this issue, follow these steps:
+
+1. [Get an API key from the Google Cloud Platform Console](https://developers.google.com/maps/documentation/android-sdk/signup).
+2. Add this line to the gradle.properties file:
+> Pencake_GoogleMapsApiKey="YOUR_API_KEY"
+3. Replace YOUR_API_KEY with your API key.
+4. Sync the project and the error will be resolved.
+
+<br><img src="screenshots/screenshot_1.png" width="360" height="640" /> <img src="screenshots/screenshot_2.png" width="360" height="640" />
